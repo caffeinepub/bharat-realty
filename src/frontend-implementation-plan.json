@@ -1,0 +1,359 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Bharat Realty — Real Estate Marketplace Frontend",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Add Internet Identity sign-in/out UI and authenticated user association in the frontend (principal-aware UX + profile setup).",
+      "acceptanceCriteria": [
+        "User can sign in and sign out using Internet Identity",
+        "After sign-in, the UI shows the signed-in state (e.g., short principal / account menu)",
+        "Backend can identify the caller Principal for create/update actions and rejects unauthenticated calls where required"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create the app shell (layout + routing) and wire authentication state into navigation (signed-in vs signed-out). Use the authorization component guidance to drive login/logout UX and profile setup gating. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/auth/AuthButton.tsx",
+          "operation": "create",
+          "description": "Create a login/logout button using useInternetIdentity and clear React Query cache on logout to remove cached app data. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/auth/ProfileSetupDialog.tsx",
+          "operation": "create",
+          "description": "Add a first-login modal that calls getCallerUserProfile and saveCallerUserProfile to store a display name (avoid showing raw principal in the UI). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useCurrentUserProfile.ts",
+          "operation": "create",
+          "description": "Create a React Query hook for getCallerUserProfile with loading semantics that avoid modal flash (actor dependency-aware), per authorization component guidance. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/layout/Header.tsx",
+          "operation": "create",
+          "description": "Create a header with brand, primary navigation, and authenticated user area (name/account menu + AuthButton). Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Implement seller listing create/edit/delete UI and wire it to backend listing capabilities; show public read-only listing views.",
+      "acceptanceCriteria": [
+        "Seller can create a listing after authentication",
+        "Seller can edit and delete only their own listings",
+        "Listings store and return: title, listing type (Land/Home), description, quoted price (numeric), currency=INR, basic location text (e.g., city/area), createdAt/updatedAt",
+        "Public listing feed and listing detail can be fetched without needing seller permissions"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/dashboard/MyListingsPage.tsx",
+          "operation": "create",
+          "description": "Create the “My Listings” dashboard page to fetch the signed-in seller’s listings and provide navigation to create/edit flows; ensure it is guarded behind authentication. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/listings/EditListingPage.tsx",
+          "operation": "create",
+          "description": "Create listing edit page that loads listing data and allows owner to update fields (title/type/category/description/INR price/location/status) using backend functions; disable/guard edit UI for non-owners. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/listings/NewListingPage.tsx",
+          "operation": "create",
+          "description": "Create listing creation page with a form to create a Land/Home listing in INR and then optionally proceed to image upload step. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/listings/ListingForm.tsx",
+          "operation": "create",
+          "description": "Create a reusable listing form component for create/edit with validation and INR-only currency selection (hidden/fixed to INR in UI). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useListings.ts",
+          "operation": "create",
+          "description": "Add React Query hooks for listing feed (fetchRandomListings) and seller listings (getListingsBySeller), including cache keys and loading/error states. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useListing.ts",
+          "operation": "create",
+          "description": "Add a React Query hook for getListing(listingId) to support listing detail and edit flows. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Support multiple listing image upload and display with a gallery/carousel and placeholder handling.",
+      "acceptanceCriteria": [
+        "Seller can upload at least 1 image for a listing and see it displayed on the listing detail page",
+        "A listing can have multiple images and the UI lets users browse them (gallery/grid and/or carousel)",
+        "Backend validates that only the listing owner can attach images to their listing",
+        "If a listing has no images, the UI shows a consistent placeholder image"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/listings/ImageUploader.tsx",
+          "operation": "create",
+          "description": "Create a multi-file image picker/uploader that converts selected files to ExternalBlob (blob-storage) and calls uploadListingImages; show upload progress (ExternalBlob.withUploadProgress). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/listings/ImageGallery.tsx",
+          "operation": "create",
+          "description": "Create an image gallery/carousel that renders listing images via ExternalBlob.getDirectURL (blob-storage) and falls back to the static placeholder when none exist. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/listings/ListingDetailPage.tsx",
+          "operation": "modify",
+          "description": "Wire ImageGallery into the listing detail page and show a consistent placeholder image when images are empty. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/listings/EditListingPage.tsx",
+          "operation": "modify",
+          "description": "Add an owner-only image management section using ImageUploader for attaching multiple images to the listing. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Create buyer browsing UI: listing feed with search/filters and listing detail with images, INR price, and CTAs.",
+      "acceptanceCriteria": [
+        "Users can browse a feed of listings",
+        "Users can search by keyword (e.g., title/location/description) and filter by type and price range",
+        "Listing cards show thumbnail, title, type, and formatted INR price",
+        "Listing detail page shows full description, image gallery, and clear CTAs for contact and offer"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/FeedPage.tsx",
+          "operation": "create",
+          "description": "Create the home/feed page that fetches listings and provides client-side search (keyword across title/location/description) and filters (type + price range), plus an empty state. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/listings/ListingCard.tsx",
+          "operation": "create",
+          "description": "Create listing card UI with thumbnail (first image direct URL or placeholder), title, type, location, and formatted INR price; link card to listing detail route. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/listings/ListingDetailPage.tsx",
+          "operation": "create",
+          "description": "Create the listing detail page showing gallery, description, location, seller section, formatted INR price, and CTAs for Contact and Make Offer. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register routes for feed and listing detail pages and ensure they are reachable via header navigation. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Implement contact-seller messaging UI for buyers and an inbox for sellers to view messages per listing.",
+      "acceptanceCriteria": [
+        "Buyer can submit a contact message from a listing detail page",
+        "Seller can view a list of messages received for their listings (with listing reference, message text, created time, and buyer Principal)",
+        "Only the listing owner can view messages for that listing",
+        "Backend persists messages and returns them in reverse chronological order"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/messages/ContactSellerDialog.tsx",
+          "operation": "create",
+          "description": "Create a contact dialog on listing detail that submits a message via sendMessage and includes senderName sourced from the user profile when authenticated. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/dashboard/InboxMessagesPage.tsx",
+          "operation": "create",
+          "description": "Create the seller “Inbox (Messages)” page to list messages for the seller’s listings (grouped/filterable by listing) by calling getMessagesForListing for each owned listing. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useMessages.ts",
+          "operation": "create",
+          "description": "Add React Query hooks to fetch messages per listing (getMessagesForListing) and to submit messages (sendMessage) with cache invalidation. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/listings/ListingDetailPage.tsx",
+          "operation": "modify",
+          "description": "Wire ContactSellerDialog into the listing detail CTAs and handle unauthenticated submission gracefully (prompt to sign in when required by backend). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register the protected dashboard inbox route and add navigation entry in the dashboard area. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Implement offer option generation (3 successive 35% reductions), buyer offer submission, and seller offer viewing UI.",
+      "acceptanceCriteria": [
+        "On listing detail, user sees 3 offer options generated from the quoted price using repeated 35% reductions (option1=price*0.65; option2=option1*0.65; option3=option2*0.65)",
+        "Offer option amounts are displayed formatted in INR with sensible rounding to whole rupees",
+        "Buyer can submit an offer for a specific listing choosing one of the 3 options",
+        "Seller can view offers received per listing (amount, option index, buyer Principal, timestamp)",
+        "Only authenticated users can submit offers"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/utils/offers.ts",
+          "operation": "create",
+          "description": "Implement deterministic offer option generation from quoted price using repeated 35% reductions and whole-rupee rounding, returning exactly 3 options plus metadata (option index)."
+        },
+        {
+          "path": "frontend/src/components/offers/MakeOfferDialog.tsx",
+          "operation": "create",
+          "description": "Create a dialog on listing detail showing the 3 generated offer options (INR formatted), allowing selection and submission via submitOffer; require authentication (prompt to sign in). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/dashboard/OffersPage.tsx",
+          "operation": "create",
+          "description": "Create seller “Offers” dashboard page that lists offers received for the seller’s listings grouped/filterable by listing (requires authenticated access). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useOffers.ts",
+          "operation": "create",
+          "description": "Add hooks for submitting offers (submitOffer) and fetching offers for a listing (requires a backend capability exposed in types) with cache invalidation. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/backend.d.ts",
+          "operation": "modify",
+          "description": "Extend the generated frontend typing to include offer read models and a backend function for fetching offers per listing (to support the seller offers dashboard UI)."
+        },
+        {
+          "path": "frontend/src/pages/listings/ListingDetailPage.tsx",
+          "operation": "modify",
+          "description": "Wire MakeOfferDialog into listing detail CTAs and ensure the offer options are derived from the listing quoted price. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register the protected dashboard offers route and add navigation entry in the dashboard area. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Format all prices as INR consistently across the UI (cards, detail, and offers).",
+      "acceptanceCriteria": [
+        "All price displays show INR formatting (₹ and Indian number formatting where applicable)",
+        "No other currency symbols are shown anywhere in the listing/offer UI"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/utils/format.ts",
+          "operation": "create",
+          "description": "Add a single formatting utility for INR display (₹, Indian digit grouping) and safe bigint-to-number/string handling for UI display."
+        },
+        {
+          "path": "frontend/src/components/listings/ListingCard.tsx",
+          "operation": "modify",
+          "description": "Use the INR formatting utility for quotedPrice display and ensure no other currency symbols appear."
+        },
+        {
+          "path": "frontend/src/pages/listings/ListingDetailPage.tsx",
+          "operation": "modify",
+          "description": "Use the INR formatting utility for quoted price and any derived offer amounts and ensure no other currency symbols appear."
+        },
+        {
+          "path": "frontend/src/components/offers/MakeOfferDialog.tsx",
+          "operation": "modify",
+          "description": "Use the INR formatting utility for all offer option amounts and submitted offer amount display."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Add seller dashboard pages and protected routing for My Listings, Inbox (Messages), and Offers.",
+      "acceptanceCriteria": [
+        "Signed-in seller can view their listings and navigate to edit/delete",
+        "Signed-in seller can view messages and offers grouped or filterable by listing",
+        "Dashboard routes are protected behind authentication (prompt to sign in if not authenticated)"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/auth/RequireAuth.tsx",
+          "operation": "create",
+          "description": "Create a route guard wrapper that requires Internet Identity authentication; show a sign-in prompt/state when unauthenticated and render children when authenticated. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/dashboard/DashboardLayout.tsx",
+          "operation": "create",
+          "description": "Create a dashboard layout with sub-navigation for “My Listings”, “Inbox (Messages)”, and “Offers”, designed for responsive use. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire dashboard routes under a protected wrapper (RequireAuth) and ensure navigation from the main header to the dashboard exists. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Apply a modern, premium real-estate visual theme consistently across feed, listing detail, and dashboard.",
+      "acceptanceCriteria": [
+        "UI has a consistent theme (color palette, typography scale, and component styling) across pages",
+        "Primary actions (Post Listing, Contact, Make Offer) are visually prominent and consistent",
+        "Layouts are responsive and usable on mobile and desktop",
+        "Theme avoids default/unstyled template look"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "create",
+          "description": "Create global Tailwind layers and CSS variables to define a premium theme (typography, spacing, color tokens) used consistently across the app."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Adjust Tailwind theme extensions (tokens/typography) to support a premium real-estate look while keeping existing shadcn/tailwind variable-based structure."
+        },
+        {
+          "path": "frontend/src/components/layout/Header.tsx",
+          "operation": "modify",
+          "description": "Apply consistent layout, spacing, and primary action styling (e.g., Post Listing) aligned with the new theme. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/FeedPage.tsx",
+          "operation": "modify",
+          "description": "Ensure feed layout, filters, cards, and empty states follow the theme and remain responsive. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/listings/ListingDetailPage.tsx",
+          "operation": "modify",
+          "description": "Ensure listing detail layout and CTAs (Contact/Offer) follow the theme and remain responsive. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "summary": "Wire generated brand and placeholder images as frontend static assets and use them in the UI.",
+      "acceptanceCriteria": [
+        "Generated images are stored under frontend/public/assets/generated",
+        "UI uses the generated logo in the header/auth area",
+        "UI uses the generated placeholder image anywhere a listing lacks uploaded images",
+        "UI uses an empty-state illustration for ‘no results’ (optional but present if generated)"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/layout/Header.tsx",
+          "operation": "modify",
+          "description": "Use the generated brand logo image at frontend/public/assets/generated/realty-logo.dim_512x256.png in the header/auth area."
+        },
+        {
+          "path": "frontend/src/components/listings/ListingCard.tsx",
+          "operation": "modify",
+          "description": "Use frontend/public/assets/generated/property-placeholder.dim_1200x800.png as the thumbnail when a listing has no uploaded images."
+        },
+        {
+          "path": "frontend/src/components/listings/ImageGallery.tsx",
+          "operation": "modify",
+          "description": "Use frontend/public/assets/generated/property-placeholder.dim_1200x800.png as the consistent placeholder when the listing image array is empty."
+        },
+        {
+          "path": "frontend/src/pages/FeedPage.tsx",
+          "operation": "modify",
+          "description": "Use frontend/public/assets/generated/no-results.dim_900x600.png for the ‘no results’ empty state illustration when filters/search return nothing."
+        }
+      ]
+    }
+  ]
+}

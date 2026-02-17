@@ -1,0 +1,220 @@
+{
+  "kind": "build_request",
+  "title": "Real Estate Marketplace (OLX-like) with Listings, Images, and Offer Options in INR",
+  "projectName": "Bharat Realty",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Add Internet Identity authentication so users can sign in/out and the app can associate actions (creating listings, sending offers/messages) to an authenticated Principal.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "allows owners to create account and create a post"
+        ]
+      },
+      "acceptanceCriteria": [
+        "User can sign in and sign out using Internet Identity",
+        "After sign-in, the UI shows the signed-in state (e.g., short principal / account menu)",
+        "Backend can identify the caller Principal for create/update actions and rejects unauthenticated calls where required"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Implement a property listing data model and CRUD endpoints for sellers to create and manage listings for land and newly built homes, including title, category/type, description, quoted price in Indian Rupees (INR), location text fields, and timestamps.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "real estate lands and new built homes selling",
+          "create a post",
+          "add description about selling product and quoting price options",
+          "currency of indian rupees"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Seller can create a listing after authentication",
+        "Seller can edit and delete only their own listings",
+        "Listings store and return: title, listing type (Land/Home), description, quoted price (numeric), currency=INR, basic location text (e.g., city/area), createdAt/updatedAt",
+        "Public listing feed and listing detail can be fetched without needing seller permissions"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Support uploading and displaying multiple images per listing, including selecting multiple files in the UI, uploading them, and rendering them in a gallery/carousel on the listing detail page.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "upload pictures of the land or homes like olx application"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Seller can upload at least 1 image for a listing and see it displayed on the listing detail page",
+        "A listing can have multiple images and the UI lets users browse them (gallery/grid and/or carousel)",
+        "Backend validates that only the listing owner can attach images to their listing",
+        "If a listing has no images, the UI shows a consistent placeholder image"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Create buyer browsing experience: a home/feed page with search and filters for listing type (Land/Home) and price range, and a listing detail page with images, description, price in INR, and seller contact/offer actions.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "like olx application",
+          "customers can contact or make offer"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Users can browse a feed of listings",
+        "Users can search by keyword (e.g., title/location/description) and filter by type and price range",
+        "Listing cards show thumbnail, title, type, and formatted INR price",
+        "Listing detail page shows full description, image gallery, and clear CTAs for contact and offer"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Implement a contact-seller flow where a buyer can send a message to the seller for a specific listing, and the seller can view received contact messages per listing.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "customers can contact"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Buyer can submit a contact message from a listing detail page",
+        "Seller can view a list of messages received for their listings (with listing reference, message text, created time, and buyer Principal)",
+        "Only the listing owner can view messages for that listing",
+        "Backend persists messages and returns them in reverse chronological order"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Implement an offer flow where, for a listing’s quoted price, the UI generates exactly 3 lower offer options by reducing the quoted price by 35% (applied successively per option) and the buyer can select one option (or choose a custom offer, if included) and submit it to the seller.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "make offer which will have 3 options of less prices than quoted price by reducing 35% from each options"
+        ]
+      },
+      "acceptanceCriteria": [
+        "On listing detail, user sees 3 offer options generated from the quoted price using repeated 35% reductions (option1=price*0.65; option2=option1*0.65; option3=option2*0.65)",
+        "Offer option amounts are displayed formatted in INR with sensible rounding to whole rupees",
+        "Buyer can submit an offer for a specific listing choosing one of the 3 options",
+        "Seller can view offers received per listing (amount, option index, buyer Principal, timestamp)",
+        "Only authenticated users can submit offers"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Format all prices consistently as Indian Rupees (INR) across the UI, including listing cards, listing detail, and offer options.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "application should contain a currency of indian rupees"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All price displays show INR formatting (₹ and Indian number formatting where applicable)",
+        "No other currency symbols are shown anywhere in the listing/offer UI"
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Add seller dashboard pages to manage listings and handle inbound messages/offers: “My Listings”, “Inbox (Messages)”, and “Offers”.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "allows owners to create account and create a post"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Signed-in seller can view their listings and navigate to edit/delete",
+        "Signed-in seller can view messages and offers grouped or filterable by listing",
+        "Dashboard routes are protected behind authentication (prompt to sign in if not authenticated)"
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Establish a coherent, modern visual theme for the marketplace UI (typography, spacing, colors, components) optimized for a ‘premium real estate’ feel, and apply it consistently across the feed, listing detail, and dashboard screens.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "with a great user experience"
+        ]
+      },
+      "acceptanceCriteria": [
+        "UI has a consistent theme (color palette, typography scale, and component styling) across pages",
+        "Primary actions (Post Listing, Contact, Make Offer) are visually prominent and consistent",
+        "Layouts are responsive and usable on mobile and desktop",
+        "Theme avoids default/unstyled template look"
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "text": "Add generated static brand and placeholder images and wire them into the UI as static assets served from the frontend (not from the backend).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "with a great user experience"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Generated images are stored under frontend/public/assets/generated",
+        "UI uses the generated logo in the header/auth area",
+        "UI uses the generated placeholder image anywhere a listing lacks uploaded images",
+        "UI uses an empty-state illustration for ‘no results’ (optional but present if generated)"
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must remain a single Motoko actor (all business logic in backend/main.mo)",
+    "Use Internet Identity as the only authentication method (no third-party auth providers)",
+    "Do not edit files under frontend/src/components/ui (compose them instead)",
+    "Do not edit immutable hook files/paths listed by the system; integrate with them via normal component usage"
+  ],
+  "nonGoals": [
+    "Online payments, escrow, or invoicing",
+    "Map/GPS-based location features",
+    "Real-time chat or WebSocket-based messaging",
+    "External database or third-party file storage integrations",
+    "Advanced moderation workflows beyond basic ownership checks"
+  ],
+  "imageRequirements": {
+    "required": [
+      "Minimal premium real estate wordmark logo (realty-logo.dim_512x256.png)",
+      "Neutral property placeholder photo/illustration tile with subtle texture (property-placeholder.dim_1200x800.png)",
+      "Empty state illustration for no search results (no-results.dim_900x600.png)"
+    ],
+    "edits": []
+  }
+}

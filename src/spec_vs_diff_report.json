@@ -1,0 +1,105 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-17T10:59:21.630Z",
+  "summary": "Diff adds a full-stack implementation scaffold: a single Motoko actor with listings/offers/messages types plus access-control + blob storage mixins, and a React UI with Internet Identity login, listing CRUD pages/routes, image upload/gallery components, contact/offer dialogs, and a dashboard layout. However, some BuildRequest items (notably feed search/filter behavior and no-results illustration wiring) are not evidenced in the provided diff summary, and several unrequested features (admin secret initialization, user profiles, expanded categories/status fields) appear.",
+  "missing_requirements": [
+    {
+      "id": "REQ-4",
+      "requirement": "Feed page must support search by keyword and filters for listing type (Land/Home) and price range.",
+      "reason": "The diff shows routing to FeedPage but provides no evidence of any search UI, keyword filtering, type filtering, or price range filtering logic in the shown files. FeedPage implementation is not included in the visible diff summary.",
+      "evidence": [
+        "frontend/src/App.tsx"
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "requirement": "Use an empty-state illustration for ‘no results’ (no-results.dim_900x600.png) in the UI.",
+      "reason": "The diff shows logo and placeholder image usage, but no evidence that the no-results illustration asset is referenced/used anywhere in the visible files.",
+      "evidence": [
+        "frontend/src/components/layout/Header.tsx",
+        "frontend/src/components/listings/ImageGallery.tsx",
+        "frontend/src/components/listings/ListingCard.tsx"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Admin-secret based access-control initialization via URL parameter (caffeineAdminToken) and backend initialization call _initializeAccessControlWithSecret.",
+      "reason": "BuildRequest requires Internet Identity auth only and does not request an admin-token/secret backdoor or URL-param-based privilege initialization.",
+      "evidence": [
+        "frontend/src/hooks/useActor.ts"
+      ]
+    },
+    {
+      "description": "User profile system and mandatory profile setup dialog (collecting/displaying a user name) gated after login.",
+      "reason": "BuildRequest does not request user profiles or collecting a user name; authentication requirement is only sign-in/out and associating actions to Principal.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/components/auth/ProfileSetupDialog.tsx",
+        "frontend/src/App.tsx",
+        "frontend/src/hooks/useQueries.ts"
+      ]
+    },
+    {
+      "description": "Expanded property category/status modeling beyond requested Land/Home (e.g., commercial/agriculture/newDevelopment; listing status active/pending/sold/archived).",
+      "reason": "REQ-2 specifies listing type Land/Home and basic fields; additional category enums and status workflow are not requested.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/components/listings/ListingForm.tsx"
+      ]
+    },
+    {
+      "description": "Offer fields for accepted/rejected states and message responded flag.",
+      "reason": "REQ-5/REQ-6 only require submitting/viewing messages/offers with timestamps and ownership checks; acceptance/rejection and responded workflow are not requested.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "description": "Footer includes an external promotional link to caffeine.ai with tracking parameters.",
+      "reason": "Not requested in BuildRequest and introduces external outbound link behavior.",
+      "evidence": [
+        "frontend/src/components/layout/Footer.tsx"
+      ]
+    }
+  ],
+  "confidence": 0.62,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/auth/AuthButton.tsx",
+    "frontend/src/components/auth/ProfileSetupDialog.tsx",
+    "frontend/src/components/dashboard/DashboardLayout.tsx",
+    "frontend/src/components/layout/Footer.tsx",
+    "frontend/src/components/layout/Header.tsx",
+    "frontend/src/components/listings/ImageGallery.tsx",
+    "frontend/src/components/listings/ImageUploader.tsx",
+    "frontend/src/components/listings/ListingCard.tsx",
+    "frontend/src/components/listings/ListingForm.tsx",
+    "frontend/src/components/messages/ContactSellerDialog.tsx",
+    "frontend/src/components/offers/MakeOfferDialog.tsx",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/index.css",
+    "frontend/src/lib/utils.ts",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/FeedPage.tsx",
+    "frontend/src/pages/dashboard/InboxMessagesPage.tsx",
+    "frontend/src/pages/dashboard/MyListingsPage.tsx",
+    "frontend/src/pages/dashboard/OffersPage.tsx",
+    "frontend/src/pages/listings/EditListingPage.tsx",
+    "frontend/src/pages/listings/ListingDetailPage.tsx",
+    "frontend/src/pages/listings/NewListingPage.tsx",
+    "frontend/src/utils/format.ts",
+    "frontend/src/utils/offers.ts",
+    "frontend/src/utils/urlParams.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

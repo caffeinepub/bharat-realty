@@ -1,2 +1,3 @@
-# bharat-realty
-Exported from Caffeine project: Bharat Realty
+## Bharat Realty
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`

@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Build a full-stack real estate marketplace (OLX-like) for selling land and newly built homes, with owner listings, image uploads, INR pricing, and buyer contact/offer flows including discounted offer options.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Minimal premium real estate wordmark logo (realty-logo.dim_512x256.png)\n- Neutral property placeholder photo/illustration tile with subtle texture (property-placeholder.dim_1200x800.png)\n- Empty state illustration for no search results (no-results.dim_900x600.png)",
+  "existing_features": [
+    {
+      "id": "feature-add-internet-identity-authentication-so-users-can-sign-in-out-and-the-app-can-associate-actions-creating-listings-sending-offers-messages-to-an-authenticated-principal",
+      "title": "Add Internet Identity authentication so users can sign in/out and the app can associate actions (creating listings, sending offers/messages) to an authenticated Principal.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-property-listing-data-model-and-crud-endpoints-for-sellers-to-create-and-manage-listings-for-land-and-newly-built-homes-including-title-category-type-description-quoted-price-in-indian-rupees-inr-location-text-fields-and-timestamps",
+      "title": "Implement a property listing data model and CRUD endpoints for sellers to create and manage listings for land and newly built homes, including title, category/type, description, quoted price in Indian Rupees (INR), location text fields, and timestamps.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-support-uploading-and-displaying-multiple-images-per-listing-including-selecting-multiple-files-in-the-ui-uploading-them-and-rendering-them-in-a-gallery-carousel-on-the-listing-detail-page",
+      "title": "Support uploading and displaying multiple images per listing, including selecting multiple files in the UI, uploading them, and rendering them in a gallery/carousel on the listing detail page.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-buyer-browsing-experience-a-home-feed-page-with-search-and-filters-for-listing-type-land-home-and-price-range-and-a-listing-detail-page-with-images-description-price-in-inr-and-seller-contact-offer-actions",
+      "title": "Create buyer browsing experience: a home/feed page with search and filters for listing type (Land/Home) and price range, and a listing detail page with images, description, price in INR, and seller contact/offer actions.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-contact-seller-flow-where-a-buyer-can-send-a-message-to-the-seller-for-a-specific-listing-and-the-seller-can-view-received-contact-messages-per-listing",
+      "title": "Implement a contact-seller flow where a buyer can send a message to the seller for a specific listing, and the seller can view received contact messages per listing.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-an-offer-flow-where-for-a-listing-s-quoted-price-the-ui-generates-exactly-3-lower-offer-options-by-reducing-the-quoted-price-by-35-applied-successively-per-option-and-the-buyer-can-select-one-option-or-choose-a-custom-offer-if-included-and-submit-it-to-the-seller",
+      "title": "Implement an offer flow where, for a listing’s quoted price, the UI generates exactly 3 lower offer options by reducing the quoted price by 35% (applied successively per option) and the buyer can select one option (or choose a custom offer, if included) and submit it to the seller.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-format-all-prices-consistently-as-indian-rupees-inr-across-the-ui-including-listing-cards-listing-detail-and-offer-options",
+      "title": "Format all prices consistently as Indian Rupees (INR) across the UI, including listing cards, listing detail, and offer options.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-seller-dashboard-pages-to-manage-listings-and-handle-inbound-messages-offers-my-listings-inbox-messages-and-offers",
+      "title": "Add seller dashboard pages to manage listings and handle inbound messages/offers: “My Listings”, “Inbox (Messages)”, and “Offers”.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-establish-a-coherent-modern-visual-theme-for-the-marketplace-ui-typography-spacing-colors-components-optimized-for-a-premium-real-estate-feel-and-apply-it-consistently-across-the-feed-listing-detail-and-dashboard-screens",
+      "title": "Establish a coherent, modern visual theme for the marketplace UI (typography, spacing, colors, components) optimized for a ‘premium real estate’ feel, and apply it consistently across the feed, listing detail, and dashboard screens.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-generated-static-brand-and-placeholder-images-and-wire-them-into-the-ui-as-static-assets-served-from-the-frontend-not-from-the-backend",
+      "title": "Add generated static brand and placeholder images and wire them into the UI as static assets served from the frontend (not from the backend).",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "User accounts for property owners (sign up/login) to manage listings",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Create and publish property listings (land/new built homes) with description and quoted price options in INR",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Upload and display multiple images for each property listing",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Buyer can contact seller and/or make an offer on a listing",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Offer flow includes 3 lower-price options derived by reducing quoted price by 35% (3 options)",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Bharat Realty",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

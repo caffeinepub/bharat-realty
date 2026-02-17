@@ -1,0 +1,234 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-add-internet-identity-authentication-so-users-can-sign-in-out-and-the-app-can-associate-actions-creating-listings-sending-offers-messages-to-an-authenticated-principal",
+      "featureTitle": "Add Internet Identity authentication so users can sign in/out and the app can associate actions (creating listings, sending offers/messages) to an authenticated Principal.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/auth/AuthButton.tsx",
+        "frontend/src/components/auth/ProfileSetupDialog.tsx",
+        "frontend/src/components/layout/Header.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-a-property-listing-data-model-and-crud-endpoints-for-sellers-to-create-and-manage-listings-for-land-and-newly-built-homes-including-title-category-type-description-quoted-price-in-indian-rupees-inr-location-text-fields-and-timestamps",
+      "featureTitle": "Implement a property listing data model and CRUD endpoints for sellers to create and manage listings for land and newly built homes, including title, category/type, description, quoted price in Indian Rupees (INR), location text fields, and timestamps.",
+      "files": [
+        "frontend/src/components/listings/ListingForm.tsx",
+        "frontend/src/pages/dashboard/MyListingsPage.tsx",
+        "frontend/src/pages/listings/EditListingPage.tsx",
+        "frontend/src/pages/listings/NewListingPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-support-uploading-and-displaying-multiple-images-per-listing-including-selecting-multiple-files-in-the-ui-uploading-them-and-rendering-them-in-a-gallery-carousel-on-the-listing-detail-page",
+      "featureTitle": "Support uploading and displaying multiple images per listing, including selecting multiple files in the UI, uploading them, and rendering them in a gallery/carousel on the listing detail page.",
+      "files": [
+        "frontend/src/components/listings/ImageGallery.tsx",
+        "frontend/src/components/listings/ImageUploader.tsx",
+        "frontend/src/pages/listings/EditListingPage.tsx",
+        "frontend/src/pages/listings/ListingDetailPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-buyer-browsing-experience-a-home-feed-page-with-search-and-filters-for-listing-type-land-home-and-price-range-and-a-listing-detail-page-with-images-description-price-in-inr-and-seller-contact-offer-actions",
+      "featureTitle": "Create buyer browsing experience: a home/feed page with search and filters for listing type (Land/Home) and price range, and a listing detail page with images, description, price in INR, and seller contact/offer actions.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/listings/ListingCard.tsx",
+        "frontend/src/pages/FeedPage.tsx",
+        "frontend/src/pages/listings/ListingDetailPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-a-contact-seller-flow-where-a-buyer-can-send-a-message-to-the-seller-for-a-specific-listing-and-the-seller-can-view-received-contact-messages-per-listing",
+      "featureTitle": "Implement a contact-seller flow where a buyer can send a message to the seller for a specific listing, and the seller can view received contact messages per listing.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/messages/ContactSellerDialog.tsx",
+        "frontend/src/pages/dashboard/InboxMessagesPage.tsx",
+        "frontend/src/pages/listings/ListingDetailPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-an-offer-flow-where-for-a-listing-s-quoted-price-the-ui-generates-exactly-3-lower-offer-options-by-reducing-the-quoted-price-by-35-applied-successively-per-option-and-the-buyer-can-select-one-option-or-choose-a-custom-offer-if-included-and-submit-it-to-the-seller",
+      "featureTitle": "Implement an offer flow where, for a listing’s quoted price, the UI generates exactly 3 lower offer options by reducing the quoted price by 35% (applied successively per option) and the buyer can select one option (or choose a custom offer, if included) and submit it to the seller.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/offers/MakeOfferDialog.tsx",
+        "frontend/src/pages/dashboard/OffersPage.tsx",
+        "frontend/src/pages/listings/ListingDetailPage.tsx",
+        "frontend/src/utils/offers.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-format-all-prices-consistently-as-indian-rupees-inr-across-the-ui-including-listing-cards-listing-detail-and-offer-options",
+      "featureTitle": "Format all prices consistently as Indian Rupees (INR) across the UI, including listing cards, listing detail, and offer options.",
+      "files": [
+        "frontend/src/components/listings/ListingCard.tsx",
+        "frontend/src/components/offers/MakeOfferDialog.tsx",
+        "frontend/src/pages/listings/ListingDetailPage.tsx",
+        "frontend/src/utils/format.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-seller-dashboard-pages-to-manage-listings-and-handle-inbound-messages-offers-my-listings-inbox-messages-and-offers",
+      "featureTitle": "Add seller dashboard pages to manage listings and handle inbound messages/offers: “My Listings”, “Inbox (Messages)”, and “Offers”.",
+      "files": [
+        "frontend/src/App.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-establish-a-coherent-modern-visual-theme-for-the-marketplace-ui-typography-spacing-colors-components-optimized-for-a-premium-real-estate-feel-and-apply-it-consistently-across-the-feed-listing-detail-and-dashboard-screens",
+      "featureTitle": "Establish a coherent, modern visual theme for the marketplace UI (typography, spacing, colors, components) optimized for a ‘premium real estate’ feel, and apply it consistently across the feed, listing detail, and dashboard screens.",
+      "files": [
+        "frontend/src/components/layout/Header.tsx",
+        "frontend/src/index.css",
+        "frontend/src/pages/FeedPage.tsx",
+        "frontend/src/pages/listings/ListingDetailPage.tsx",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-9"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-generated-static-brand-and-placeholder-images-and-wire-them-into-the-ui-as-static-assets-served-from-the-frontend-not-from-the-backend",
+      "featureTitle": "Add generated static brand and placeholder images and wire them into the UI as static assets served from the frontend (not from the backend).",
+      "files": [
+        "frontend/src/components/layout/Header.tsx",
+        "frontend/src/components/listings/ImageGallery.tsx",
+        "frontend/src/components/listings/ListingCard.tsx",
+        "frontend/src/pages/FeedPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-10"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

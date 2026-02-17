@@ -1,0 +1,320 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-17T10:59:21.633Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 10,
+    "implemented": 10,
+    "items": [
+      {
+        "id": "REQ-1",
+        "summary": "Add Internet Identity authentication so users can sign in/out and the app can associate actions (creating listings, sending offers/messages) to an authenticated Principal.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/App.tsx",
+          "frontend/src/components/auth/AuthButton.tsx",
+          "frontend/src/components/auth/ProfileSetupDialog.tsx",
+          "frontend/src/hooks/useCurrentUserProfile.ts",
+          "frontend/src/components/layout/Header.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/App.tsx",
+          "frontend/src/components/auth/AuthButton.tsx",
+          "frontend/src/components/auth/ProfileSetupDialog.tsx",
+          "frontend/src/components/layout/Header.tsx"
+        ]
+      },
+      {
+        "id": "REQ-10",
+        "summary": "Add generated static brand and placeholder images and wire them into the UI as static assets served from the frontend (not from the backend).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/layout/Header.tsx",
+          "frontend/src/components/listings/ListingCard.tsx",
+          "frontend/src/components/listings/ImageGallery.tsx",
+          "frontend/src/pages/FeedPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/layout/Header.tsx",
+          "frontend/src/components/listings/ListingCard.tsx",
+          "frontend/src/components/listings/ImageGallery.tsx",
+          "frontend/src/pages/FeedPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Implement a property listing data model and CRUD endpoints for sellers to create and manage listings for land and newly built homes, including title, category/type, description, quoted price in Indian Rupees (INR), location text fields, and timestamps.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/dashboard/MyListingsPage.tsx",
+          "frontend/src/pages/listings/EditListingPage.tsx",
+          "frontend/src/pages/listings/NewListingPage.tsx",
+          "frontend/src/components/listings/ListingForm.tsx",
+          "frontend/src/hooks/useListings.ts",
+          "frontend/src/hooks/useListing.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/dashboard/MyListingsPage.tsx",
+          "frontend/src/pages/listings/EditListingPage.tsx",
+          "frontend/src/pages/listings/NewListingPage.tsx",
+          "frontend/src/components/listings/ListingForm.tsx"
+        ]
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Support uploading and displaying multiple images per listing, including selecting multiple files in the UI, uploading them, and rendering them in a gallery/carousel on the listing detail page.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/listings/ImageUploader.tsx",
+          "frontend/src/components/listings/ImageGallery.tsx",
+          "frontend/src/pages/listings/ListingDetailPage.tsx",
+          "frontend/src/pages/listings/EditListingPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/listings/ImageUploader.tsx",
+          "frontend/src/components/listings/ImageGallery.tsx",
+          "frontend/src/pages/listings/ListingDetailPage.tsx",
+          "frontend/src/pages/listings/EditListingPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-4",
+        "summary": "Create buyer browsing experience: a home/feed page with search and filters for listing type (Land/Home) and price range, and a listing detail page with images, description, price in INR, and seller contact/offer actions.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/FeedPage.tsx",
+          "frontend/src/components/listings/ListingCard.tsx",
+          "frontend/src/pages/listings/ListingDetailPage.tsx",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/FeedPage.tsx",
+          "frontend/src/components/listings/ListingCard.tsx",
+          "frontend/src/pages/listings/ListingDetailPage.tsx",
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-5",
+        "summary": "Implement a contact-seller flow where a buyer can send a message to the seller for a specific listing, and the seller can view received contact messages per listing.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/messages/ContactSellerDialog.tsx",
+          "frontend/src/pages/dashboard/InboxMessagesPage.tsx",
+          "frontend/src/hooks/useMessages.ts",
+          "frontend/src/pages/listings/ListingDetailPage.tsx",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/messages/ContactSellerDialog.tsx",
+          "frontend/src/pages/dashboard/InboxMessagesPage.tsx",
+          "frontend/src/pages/listings/ListingDetailPage.tsx",
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-6",
+        "summary": "Implement an offer flow where, for a listing’s quoted price, the UI generates exactly 3 lower offer options by reducing the quoted price by 35% (applied successively per option) and the buyer can select one option (or choose a custom offer, if included) and submit it to the seller.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/utils/offers.ts",
+          "frontend/src/components/offers/MakeOfferDialog.tsx",
+          "frontend/src/pages/dashboard/OffersPage.tsx",
+          "frontend/src/hooks/useOffers.ts",
+          "frontend/src/backend.d.ts",
+          "frontend/src/pages/listings/ListingDetailPage.tsx",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/utils/offers.ts",
+          "frontend/src/components/offers/MakeOfferDialog.tsx",
+          "frontend/src/pages/dashboard/OffersPage.tsx",
+          "frontend/src/backend.d.ts",
+          "frontend/src/pages/listings/ListingDetailPage.tsx",
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-7",
+        "summary": "Format all prices consistently as Indian Rupees (INR) across the UI, including listing cards, listing detail, and offer options.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/utils/format.ts",
+          "frontend/src/components/listings/ListingCard.tsx",
+          "frontend/src/pages/listings/ListingDetailPage.tsx",
+          "frontend/src/components/offers/MakeOfferDialog.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/utils/format.ts",
+          "frontend/src/components/listings/ListingCard.tsx",
+          "frontend/src/pages/listings/ListingDetailPage.tsx",
+          "frontend/src/components/offers/MakeOfferDialog.tsx"
+        ]
+      },
+      {
+        "id": "REQ-8",
+        "summary": "Add seller dashboard pages to manage listings and handle inbound messages/offers: “My Listings”, “Inbox (Messages)”, and “Offers”.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/auth/RequireAuth.tsx",
+          "frontend/src/pages/dashboard/DashboardLayout.tsx",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-9",
+        "summary": "Establish a coherent, modern visual theme for the marketplace UI (typography, spacing, colors, components) optimized for a ‘premium real estate’ feel, and apply it consistently across the feed, listing detail, and dashboard screens.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/index.css",
+          "frontend/tailwind.config.js",
+          "frontend/src/components/layout/Header.tsx",
+          "frontend/src/pages/FeedPage.tsx",
+          "frontend/src/pages/listings/ListingDetailPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/index.css",
+          "frontend/tailwind.config.js",
+          "frontend/src/components/layout/Header.tsx",
+          "frontend/src/pages/FeedPage.tsx",
+          "frontend/src/pages/listings/ListingDetailPage.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "backend/authorization/MixinAuthorization.mo",
+    "backend/authorization/access-control.mo",
+    "backend/blob-storage/Mixin.mo",
+    "backend/blob-storage/Storage.mo",
+    "backend/main.mo",
+    "build-request.json",
+    "build-template/Dockerfile",
+    "build-template/LICENSE",
+    "build-template/README.md",
+    "build-template/deploy.sh",
+    "build-template/icp.yaml",
+    "build-template/package.json",
+    "build-template/pnpm-lock.yaml",
+    "build-template/pnpm-workspace.yaml",
+    "build-template/scripts/prune-unused-images.js",
+    "build-template/scripts/resize-images.js",
+    "build-template/src/backend/canister.yaml",
+    "build-template/src/backend/system-idl/aaaaa-aa.did",
+    "build-template/src/frontend/canister.yaml",
+    "build-template/src/frontend/components.json",
+    "build-template/src/frontend/env.json",
+    "build-template/src/frontend/eslint-rules/no-bigint-in-query-keys.js",
+    "build-template/src/frontend/eslint-rules/require-internet-identity-provider.js",
+    "build-template/src/frontend/eslint.config.js",
+    "build-template/src/frontend/package.json",
+    "build-template/src/frontend/postcss.config.js",
+    "build-template/src/frontend/src/components/ui/accordion.tsx",
+    "build-template/src/frontend/src/components/ui/alert-dialog.tsx",
+    "build-template/src/frontend/src/components/ui/alert.tsx",
+    "build-template/src/frontend/src/components/ui/aspect-ratio.tsx",
+    "build-template/src/frontend/src/components/ui/avatar.tsx",
+    "build-template/src/frontend/src/components/ui/badge.tsx",
+    "build-template/src/frontend/src/components/ui/breadcrumb.tsx",
+    "build-template/src/frontend/src/components/ui/button.tsx",
+    "build-template/src/frontend/src/components/ui/calendar.tsx",
+    "build-template/src/frontend/src/components/ui/card.tsx",
+    "build-template/src/frontend/src/components/ui/carousel.tsx",
+    "build-template/src/frontend/src/components/ui/chart.tsx",
+    "build-template/src/frontend/src/components/ui/checkbox.tsx",
+    "build-template/src/frontend/src/components/ui/collapsible.tsx",
+    "build-template/src/frontend/src/components/ui/command.tsx",
+    "build-template/src/frontend/src/components/ui/context-menu.tsx",
+    "build-template/src/frontend/src/components/ui/dialog.tsx",
+    "build-template/src/frontend/src/components/ui/drawer.tsx",
+    "build-template/src/frontend/src/components/ui/dropdown-menu.tsx",
+    "build-template/src/frontend/src/components/ui/form.tsx",
+    "build-template/src/frontend/src/components/ui/hover-card.tsx",
+    "build-template/src/frontend/src/components/ui/input-otp.tsx",
+    "build-template/src/frontend/src/components/ui/input.tsx",
+    "build-template/src/frontend/src/components/ui/label.tsx",
+    "build-template/src/frontend/src/components/ui/menubar.tsx",
+    "build-template/src/frontend/src/components/ui/navigation-menu.tsx",
+    "build-template/src/frontend/src/components/ui/pagination.tsx",
+    "build-template/src/frontend/src/components/ui/popover.tsx",
+    "build-template/src/frontend/src/components/ui/progress.tsx",
+    "build-template/src/frontend/src/components/ui/radio-group.tsx",
+    "build-template/src/frontend/src/components/ui/resizable.tsx",
+    "build-template/src/frontend/src/components/ui/scroll-area.tsx",
+    "build-template/src/frontend/src/components/ui/select.tsx",
+    "build-template/src/frontend/src/components/ui/separator.tsx",
+    "build-template/src/frontend/src/components/ui/sheet.tsx",
+    "build-template/src/frontend/src/components/ui/sidebar.tsx",
+    "build-template/src/frontend/src/components/ui/skeleton.tsx",
+    "build-template/src/frontend/src/components/ui/slider.tsx",
+    "build-template/src/frontend/src/components/ui/sonner.tsx",
+    "build-template/src/frontend/src/components/ui/switch.tsx",
+    "build-template/src/frontend/src/components/ui/table.tsx",
+    "build-template/src/frontend/src/components/ui/tabs.tsx",
+    "build-template/src/frontend/src/components/ui/textarea.tsx",
+    "build-template/src/frontend/src/components/ui/toggle-group.tsx",
+    "build-template/src/frontend/src/components/ui/toggle.tsx",
+    "build-template/src/frontend/src/components/ui/tooltip.tsx",
+    "build-template/src/frontend/src/hooks/use-mobile.tsx",
+    "build-template/src/frontend/src/lib/utils.ts",
+    "build-template/src/frontend/tsconfig.json",
+    "build-template/src/frontend/vite.config.js",
+    "build-template/tsconfig.json",
+    "caffeine.lock.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/public/assets/generated/no-results.dim_900x600.png",
+    "frontend/public/assets/generated/property-placeholder.dim_1200x800.png",
+    "frontend/public/assets/generated/realty-logo.dim_512x256.png",
+    "frontend/src/App.tsx",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/components/auth/AuthButton.tsx",
+    "frontend/src/components/auth/ProfileSetupDialog.tsx",
+    "frontend/src/components/dashboard/DashboardLayout.tsx",
+    "frontend/src/components/layout/Footer.tsx",
+    "frontend/src/components/layout/Header.tsx",
+    "frontend/src/components/listings/ImageGallery.tsx",
+    "frontend/src/components/listings/ImageUploader.tsx",
+    "frontend/src/components/listings/ListingCard.tsx",
+    "frontend/src/components/listings/ListingForm.tsx",
+    "frontend/src/components/messages/ContactSellerDialog.tsx",
+    "frontend/src/components/offers/MakeOfferDialog.tsx",
+    "frontend/src/config.ts",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/index.css",
+    "frontend/src/lib/utils.ts",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/FeedPage.tsx",
+    "frontend/src/pages/dashboard/InboxMessagesPage.tsx",
+    "frontend/src/pages/dashboard/MyListingsPage.tsx",
+    "frontend/src/pages/dashboard/OffersPage.tsx",
+    "frontend/src/pages/listings/EditListingPage.tsx",
+    "frontend/src/pages/listings/ListingDetailPage.tsx",
+    "frontend/src/pages/listings/NewListingPage.tsx",
+    "frontend/src/ui-summary.json",
+    "frontend/src/utils/StorageClient.ts",
+    "frontend/src/utils/format.ts",
+    "frontend/src/utils/offers.ts",
+    "frontend/src/utils/urlParams.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}
